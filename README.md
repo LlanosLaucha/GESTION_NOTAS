@@ -20,7 +20,7 @@ Proyecto para la materia de Programación Orientada a Objetos. Es una aplicació
 
 # Estructura del Proyecto
 
-´´´
+```
 gestion_notas/
 ├── __init__.py
 ├── models/
@@ -33,7 +33,7 @@ gestion_notas/
     ├── __init__.py
     └── main_view.py
 main.py
-´´´
+```
 
 # Instalación y Ejecución
 
