@@ -1,0 +1,20 @@
+Entornos Virtuales
+Ignora la carpeta del entorno virtual para no subir librerías al repositorio.
+venv/
+/venv/
+.venv/
+/.venv/
+
+Archivos compilados de Python
+Ignora los archivos de bytecode que Python genera automáticamente.
+pycache/
+*.pyc
+
+Carpetas de configuración de IDEs
+Ignora los archivos de configuración específicos de editores de código.
+.vscode/
+.idea/
+
+Archivos de entorno
+Ignora archivos que puedan contener contraseñas o datos sensibles.
+.env
