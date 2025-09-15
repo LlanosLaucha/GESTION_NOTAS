@@ -4,11 +4,15 @@ Proyecto para la materia de Programación Orientada a Objetos. Es una aplicació
 
 # Características Principales
 
-1. Alta de Notas: Permite registrar nuevas notas especificando materia, calificación, fecha, etc.
-2. Listado de Notas: Muestra todas las notas existentes en una tabla clara y ordenada.
-3. Modificación de Notas: Permite editar la información de una nota ya existente.
-4. Baja de Notas: Permite eliminar notas del sistema.
-5. Interfaz Gráfica Intuitiva: Diseñada para ser fácil de usar.
+1. Gestión de Alumnos: Permite registrar nuevos alumnos (nombre, apellido, DNI), modificar sus datos y eliminarlos del sistema.
+
+2. Gestión de Notas por Alumno: Para cada alumno seleccionado, la aplicación permite añadir, modificar y eliminar sus notas académicas (materia, calificación).
+
+3. Interfaz de Doble Panel: La pantalla principal está dividida en dos secciones para una gestión clara y simultánea de alumnos y sus notas correspondientes.
+
+4. Persistencia de Datos: Toda la información se guarda de forma segura en una base de datos MySQL, garantizando que los datos no se pierdan al cerrar la aplicación.
+
+5. Relación de Datos: Utiliza claves foráneas para vincular de forma segura las notas con cada alumno, y elimina las notas en cascada si un alumno es borrado.
 
 # Tecnologías Utilizadas
 
@@ -25,9 +29,11 @@ gestion_notas/
 ├── __init__.py
 ├── models/
 │   ├── __init__.py
+│   ├── alumno_model.py
 │   └── nota_model.py
 ├── services/
 │   ├── __init__.py
+│   ├── alumno_service.py
 │   └── nota_service.py
 └── views/
     ├── __init__.py
@@ -44,8 +50,16 @@ main.py
 
 
 3. (Recomendado) Crear un entorno virtual:
+
+```
+# En Windows
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+venv\Scripts\activate
+
+# En macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
 
 4. Instalar las dependencias (el conector de MySQL): pip install mysql-connector-python
@@ -53,7 +67,7 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 
 5. Configurar la Base de Datos:
     a. Asegúrate de tener un servidor MySQL en ejecución.
-    b. Usando MySQL Workbench o cualquier otro cliente, crea una nueva base de datos. Ejemplo: CREATE DATABASE gestion_notas_db;
+    b. Usando MySQL Workbench o cualquier otro cliente, crea una nueva base de datos. Ejemplo: CREATE DATABASE gestion_notas;
     c. Crea la tabla necesaria para las notas (el script se proveerá más adelante).
 
 6. Ejecutar la aplicación: python main.py
@@ -62,7 +76,7 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 # Equipo de Desarrollo
 
 * **[Llanos Lautaro]** - Lider del proyecto / Tester / Documentador - @LlanosLaucha
-* **[Fleck Ian]** - Backend - @usuario-github
-* **[Maidana Nicolas]** - Backend - @usuario-github
+* **[Fleck Ian]** - Backend - @ianfleck00
+* **[Maidana Nicolas]** - Backend - @NicoMaidanaa
 * **[Kocur Malena]** - Frontend - @usuario-github
-* **[Fernandez Candela]** - Frontend - @usuario-github
+* **[Fernandez Candela]** - Frontend - @candeelaa14
