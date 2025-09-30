@@ -1,0 +1,41 @@
+[33mcommit 71727649b97b655918c51a37550a1c4c62502cb9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: ianfleck00 <ianfle123@gmail.com>
+Date:   Tue Sep 30 13:01:21 2025 -0300
+
+    actualizacion 1.0 de ian
+
+[33mcommit 6fd4303a0f2f5b2797ac2e888387f3b2d5bb8953[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 00ef2bd 9e4dd53
+Author: LlanosLaucha <lautarojn26@gmail.com>
+Date:   Mon Sep 15 15:01:14 2025 -0300
+
+    Merge pull request #2 from LlanosLaucha/fix/estructura-corregida
+    
+    Fix: se corrige el contenido de los archivos
+
+[33mcommit 9e4dd5352128b223dbeaad7d714292b938351ee3[m
+Author: Llanos Lautaro <lautarojn26@gmail.com>
+Date:   Mon Sep 15 14:32:45 2025 -0300
+
+    Fix: se corrige el contenido de los archivos
+
+[33mcommit 00ef2bd14737deeb5908457fc281178895ab4a7a[m
+Merge: 76bb5fb 40c823e
+Author: LlanosLaucha <lautarojn26@gmail.com>
+Date:   Mon Sep 8 16:56:38 2025 -0300
+
+    Merge pull request #1 from LlanosLaucha/docs/corrección-formato-en-readme
+    
+    Docs: Corrección del formato de la estructura del proyecto en README
+
+[33mcommit 40c823eabbd15cde0f45f39caa6af8541b15a579[m
+Author: Llanos Lautaro <lautarojn26@gmail.com>
+Date:   Mon Sep 8 16:54:58 2025 -0300
+
+    Docs: Corrección del formato de la estructura del proyecto en README
+
+[33mcommit 76bb5fb2a6228b7e287bfb66076b1b1a265bad9c[m
+Author: Llanos Lautaro <lautarojn26@gmail.com>
+Date:   Mon Sep 8 16:46:50 2025 -0300
+
+    Commit inicial: Configuración del proyecto
