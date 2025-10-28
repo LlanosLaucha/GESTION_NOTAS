@@ -1,0 +1,114 @@
+-- -----------------------------------------------------
+-- Base de datos: gestion_notas
+-- -----------------------------------------------------
+
+CREATE DATABASE IF NOT EXISTS gestion_notas
+  DEFAULT CHARACTER SET utf8
+  DEFAULT ENCRYPTION='N';
+
+USE gestion_notas;
+
+-- -----------------------------------------------------
+-- Tabla: alumnos
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS alumnos;
+CREATE TABLE alumnos (
+  id_alumnos INT NOT NULL,
+  nombre VARCHAR(45) NOT NULL,
+  apellido VARCHAR(45) NOT NULL,
+  dni INT NOT NULL,
+  condicion VARCHAR(20) DEFAULT 'activo',
+  PRIMARY KEY (id_alumnos),
+  UNIQUE KEY id_alumno_UNIQUE (id_alumnos)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO alumnos (id_alumnos, nombre, apellido, dni, condicion) VALUES
+(1,'ian','fleck',44436438,'activo'),
+(2,'malena','kocur',45673228,'activo');
+
+-- -----------------------------------------------------
+-- Tabla: anios
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS anios;
+CREATE TABLE anios (
+  id_anios INT NOT NULL,
+  descripcion INT NOT NULL,
+  PRIMARY KEY (id_anios)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO anios (id_anios, descripcion) VALUES
+(1,2023),
+(2,2024),
+(3,2025);
+
+-- -----------------------------------------------------
+-- Tabla: estados
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS estados;
+CREATE TABLE estados (
+  id_estados INT NOT NULL,
+  descripcion VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_estados)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO estados (id_estados, descripcion) VALUES
+(1,'Aprobado'),
+(2,'Desaprobado'),
+(3,'Pendiente'),
+(4,'Ausente');
+
+-- -----------------------------------------------------
+-- Tabla: materias
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS materias;
+CREATE TABLE materias (
+  id_materias INT NOT NULL,
+  descripcion VARCHAR(45) NOT NULL,
+  condicion VARCHAR(20) DEFAULT 'activa',
+  PRIMARY KEY (id_materias),
+  UNIQUE KEY id_materias_UNIQUE (id_materias)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO materias (id_materias, descripcion, condicion) VALUES
+(1,'matematicas','activa'),
+(2,'programacion','activa'),
+(3,'lenguaje','activa'),
+(4,'lengua','activa');
+
+-- -----------------------------------------------------
+-- Tabla: notas
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS notas;
+CREATE TABLE notas (
+  id_notas INT NOT NULL,
+  id_alumnos INT NOT NULL,
+  id_materias INT NOT NULL,
+  nota_final FLOAT DEFAULT NULL,
+  id_anios INT NOT NULL,
+  id_estados INT NOT NULL,
+  condicion TINYINT(1) DEFAULT 1,
+  PRIMARY KEY (id_notas),
+  UNIQUE KEY id_notas_UNIQUE (id_notas),
+  KEY fk_notas_alumnos_idx (id_alumnos),
+  KEY fk_notas_materias_idx (id_materias),
+  KEY fk_notas_anios_idx (id_anios),
+  KEY fk_notas_estados_idx (id_estados),
+  CONSTRAINT fk_notas_alumnos FOREIGN KEY (id_alumnos) REFERENCES alumnos (id_alumnos),
+  CONSTRAINT fk_notas_materias FOREIGN KEY (id_materias) REFERENCES materias (id_materias),
+  CONSTRAINT fk_notas_anios FOREIGN KEY (id_anios) REFERENCES anios (id_anios),
+  CONSTRAINT fk_notas_estados FOREIGN KEY (id_estados) REFERENCES estados (id_estados)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO notas (id_notas, id_alumnos, id_materias, nota_final, id_anios, id_estados, condicion) VALUES
+(1,1,3,10,3,1,1),
+(2,2,3,10,3,1,1),
+(3,1,1,9,3,1,1);
+
+-- -----------------------------------------------------
+-- Fin del script
+-- -----------------------------------------------------
