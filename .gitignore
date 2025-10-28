@@ -1,20 +1,53 @@
-Entornos Virtuales
-Ignora la carpeta del entorno virtual para no subir librerías al repositorio.
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
 venv/
-/venv/
-.venv/
-/.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
 
-Archivos compilados de Python
-Ignora los archivos de bytecode que Python genera automáticamente.
-pycache/
-*.pyc
-
-Carpetas de configuración de IDEs
-Ignora los archivos de configuración específicos de editores de código.
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-Archivos de entorno
-Ignora archivos que puedan contener contraseñas o datos sensibles.
-.env
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Config
+config/db_config_local.py
+
+# Logs
+*.log
