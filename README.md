@@ -1,226 +1,82 @@
-# Sistema de Gestión de Notas - ITEC Nº 3
+# Sistema de Gestión de Notas Académicas
 
-Sistema de gestión académica desarrollado en Python con interfaz gráfica Tkinter para administrar alumnos, materias y notas.
+Proyecto para la materia de Programación Orientada a Objetos. Es una aplicación de escritorio para administrar notas académicas, permitiendo crear, leer, actualizar y eliminar registros (ABM/CRUD).
 
-## 📋 Características
+# Características Principales
 
-- ✅ Gestión completa de alumnos (CRUD)
-- ✅ Gestión de materias
-- ✅ Registro de notas por alumno
-- ✅ Consulta de historial académico
-- ✅ Interfaz gráfica profesional e intuitiva
-- ✅ Arquitectura MVC (Modelo-Vista-Controlador)
-- ✅ Base de datos MySQL
-- ✅ Diseño con colores corporativos profesionales
+1. Gestión de Alumnos: Permite registrar nuevos alumnos (nombre, apellido, DNI), modificar sus datos y eliminarlos del sistema.
 
-## 🚀 Tecnologías
+2. Gestión de Notas por Alumno: Para cada alumno seleccionado, la aplicación permite añadir, modificar y eliminar sus notas académicas (materia, calificación).
 
-- **Python 3.x**
-- **Tkinter** (Interfaz gráfica)
-- **MySQL** (Base de datos)
-- **mysql-connector-python** (Conector de base de datos)
+3. Interfaz de Doble Panel: La pantalla principal está dividida en dos secciones para una gestión clara y simultánea de alumnos y sus notas correspondientes.
 
-## 📦 Instalación
+4. Persistencia de Datos: Toda la información se guarda de forma segura en una base de datos MySQL, garantizando que los datos no se pierdan al cerrar la aplicación.
 
-### Requisitos previos
+5. Relación de Datos: Utiliza claves foráneas para vincular de forma segura las notas con cada alumno, y elimina las notas en cascada si un alumno es borrado.
 
-- Python 3.7 o superior
-- MySQL Server 8.0 o superior
-- MySQL Workbench (opcional, para administración de base de datos)
+# Tecnologías Utilizadas
 
-### Pasos de instalación
+1. Lenguaje: Python 3
+2. Interfaz Gráfica (GUI): Tkinter
+3. Base de Datos: MySQL (Workbench 8.0)
+4. Control de Versiones: Git y GitHub
+5. Arquitectura: Modelo-Vista-Servicio (una variación de MVC)
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/LlanosLaucha/GESTION_NOTAS.git
-   cd GESTION_NOTAS
-   ```
-
-2. **Crear entorno virtual (recomendado)**
-   ```bash
-   python -m venv venv
-   
-   # En Windows
-   venv\Scripts\activate
-   
-   # En Linux/Mac
-   source venv/bin/activate
-   ```
-
-3. **Instalar dependencias**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configurar la base de datos**
-
-   a. Crear la base de datos en MySQL:
-   ```bash
-   mysql -u root -p < database/script_creacion.sql
-   ```
-
-   b. Cargar datos de prueba (opcional):
-   ```bash
-   mysql -u root -p gestion_notas < database/datos_prueba.sql
-   ```
-
-   c. Configurar credenciales en `config/db_config.py`:
-   ```python
-   DB_CONFIG = {
-       'host': 'localhost',
-       'user': 'root',
-       'password': 'Root2025',  # Cambiar por tu contraseña
-       'database': 'gestion_notas'
-   }
-   ```
-
-5. **Ejecutar la aplicación**
-   ```bash
-   python main.py
-   ```
-
-## 📂 Estructura del Proyecto
+# Estructura del Proyecto
 
 ```
-GESTION_NOTAS/
-│
-├── main.py                 # Punto de entrada de la aplicación
-├── requirements.txt        # Dependencias del proyecto
-├── README.md              # Documentación
-├── .gitignore             # Archivos ignorados por Git
-│
-├── config/                # Configuración
+gestion_notas/
+├── __init__.py
+├── models/
 │   ├── __init__.py
-│   └── db_config.py       # Configuración de base de datos
-│
-├── models/                # Modelos de datos (POO)
+│   ├── alumno_model.py
+│   └── nota_model.py
+├── services/
 │   ├── __init__.py
-│   ├── alumno_model.py    # Clase Alumno
-│   ├── materia_model.py   # Clase Materia
-│   ├── anio_model.py      # Clase Año
-│   ├── estado_model.py    # Clase Estado
-│   └── nota_model.py      # Clase Nota
-│
-├── services/              # Lógica de negocio y acceso a datos
-│   ├── __init__.py
-│   ├── alumno_service.py  # CRUD de alumnos
-│   ├── materia_service.py # CRUD de materias
-│   ├── anio_service.py    # Operaciones con años
-│   ├── estado_service.py  # Operaciones con estados
-│   └── nota_service.py    # CRUD de notas
-│
-├── views/                 # Interfaz gráfica
-│   ├── __init__.py
-│   └── main_view.py       # Vista principal
-│
-└── database/              # Scripts de base de datos
-    ├── script_creacion.sql    # Creación de tablas
-    └── datos_prueba.sql       # Datos de ejemplo
+│   ├── alumno_service.py
+│   └── nota_service.py
+└── views/
+    ├── __init__.py
+    └── main_view.py
+main.py
 ```
 
-## 💾 Base de Datos
+# Instalación y Ejecución
 
-### Tablas
+1. Clonar el repositorio: git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
 
-- **alumnos**: Información de estudiantes
-- **materias**: Catálogo de materias
-- **anios**: Años académicos
-- **estados**: Estados de notas (Aprobado, Desaprobado, etc.)
-- **notas**: Registro de calificaciones
 
-### Diagrama ER
+2. Navegar al directorio del proyecto: cd nombre-del-repositorio
+
+
+3. (Recomendado) Crear un entorno virtual:
 
 ```
-alumnos (1) ----< (N) notas (N) >---- (1) materias
-                        ↓
-                    (1) anios
-                        ↓
-                    (1) estados
+# En Windows
+python -m venv venv
+venv\Scripts\activate
+
+# En macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-## 🎨 Interfaz
 
-La aplicación cuenta con tres pestañas principales:
+4. Instalar las dependencias (el conector de MySQL): pip install mysql-connector-python
 
-1. **📚 ALUMNOS**: Gestión completa de estudiantes
-   - Registro de nuevos alumnos
-   - Modificación de datos
-   - Eliminación lógica
-   - Visualización en tabla ordenada
 
-2. **📝 NOTAS**: Gestión de calificaciones
-   - Asignación de notas por alumno y materia
-   - Consulta de historial académico
-   - Modificación y eliminación de registros
+5. Configurar la Base de Datos:
+    a. Asegúrate de tener un servidor MySQL en ejecución.
+    b. Usando MySQL Workbench o cualquier otro cliente, crea una nueva base de datos. Ejemplo: CREATE DATABASE gestion_notas;
+    c. Crea la tabla necesaria para las notas (el script se proveerá más adelante).
 
-3. **⚙️ CONFIGURACIÓN**: Gestión de catálogos
-   - Administración de materias
-   - Visualización de configuraciones
+6. Ejecutar la aplicación: python main.py
 
-### Colores Corporativos
 
-- Azul Oscuro Principal: `#1E3A5F`
-- Azul Medio: `#2E5984`
-- Azul Claro: `#4A7BA7`
-- Fondo: `#F5F6FA`
-- Texto: `#2C3E50`
+# Equipo de Desarrollo
 
-## 🔧 Uso
-
-### Agregar un Alumno
-
-1. Ir a la pestaña "ALUMNOS"
-2. Completar el formulario con los datos del alumno
-3. Hacer clic en "Agregar"
-
-### Registrar una Nota
-
-1. Ir a la pestaña "NOTAS"
-2. Seleccionar un alumno del desplegable
-3. Completar el formulario de nota
-4. Hacer clic en "Agregar"
-
-### Modificar Registros
-
-1. Seleccionar el registro de la tabla
-2. Modificar los datos en el formulario
-3. Hacer clic en "Modificar"
-
-## 👥 Autor
-
-**Proyecto Final - Programación Orientada a Objetos**
-- ITEC Nº 3 - Instituto Técnico
-- Prof. Medina, Juan Agustín
-
-## 📄 Licencia
-
-Este proyecto es de código abierto y está disponible bajo la Licencia MIT.
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Para cambios importantes:
-
-1. Fork el proyecto
-2. Crea una rama para tu característica (`git checkout -b feature/NuevaCaracteristica`)
-3. Commit tus cambios (`git commit -m 'Agregar nueva característica'`)
-4. Push a la rama (`git push origin feature/NuevaCaracteristica`)
-5. Abre un Pull Request
-
-## 📞 Contacto
-
-Para preguntas o sugerencias:
-- GitHub: [@LlanosLaucha](https://github.com/LlanosLaucha)
-- Repositorio: https://github.com/LlanosLaucha/GESTION_NOTAS
-
-## ✨ Características Destacadas
-
-- **Arquitectura POO**: Código modular y mantenible
-- **Patrón MVC**: Separación clara de responsabilidades
-- **Validaciones**: Control de datos de entrada
-- **Manejo de errores**: Mensajes informativos al usuario
-- **Interfaz profesional**: Diseño intuitivo y moderno
-- **Base de datos relacional**: Integridad referencial
-- **Eliminación lógica**: Preservación del historial
-
----
-Desarrollado con ❤️ para ITEC Nº 3
+* **[Llanos Lautaro]** - Lider del proyecto / Tester / Documentador - @LlanosLaucha
+* **[Fleck Ian]** - Backend - @ianfleck00
+* **[Maidana Nicolas]** - Backend - @NicoMaidanaa
+* **[Kocur Malena]** - Frontend - @Malekocur
+* **[Fernandez Candela]** - Frontend - @candeelaa14
