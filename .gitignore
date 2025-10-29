@@ -1,53 +1,20 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual Environment
+Entornos Virtuales
+Ignora la carpeta del entorno virtual para no subir librerías al repositorio.
 venv/
-env/
-ENV/
-env.bak/
-venv.bak/
+/venv/
+.venv/
+/.venv/
 
-# IDE
+Archivos compilados de Python
+Ignora los archivos de bytecode que Python genera automáticamente.
+pycache/
+*.pyc
+
+Carpetas de configuración de IDEs
+Ignora los archivos de configuración específicos de editores de código.
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Config
-config/db_config_local.py
-
-# Logs
-*.log
+Archivos de entorno
+Ignora archivos que puedan contener contraseñas o datos sensibles.
+.env
