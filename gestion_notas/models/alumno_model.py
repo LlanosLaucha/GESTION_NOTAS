@@ -9,4 +9,5 @@ class Alumno:
         self.dni = dni
 
     def __str__(self):
+        # Corregido para ser un f-string válido
         return f"Alumno(ID: {self.id}, DNI: '{self.dni}', Nombre: '{self.nombre}', Apellido: '{self.apellido}')"
