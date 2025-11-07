@@ -1,0 +1,9 @@
+# Dependencias del Proyecto GESTION_NOTAS
+
+# Para la interfaz gráfica y los temas
+
+ttkbootstrap
+
+# Para la conexión con la base de datos MySQL
+
+mysql-connector-python

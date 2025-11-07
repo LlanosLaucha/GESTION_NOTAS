@@ -15,7 +15,7 @@ def get_db_connection():
     Maneja la excepción si la conexión falla.
     """
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
+        conn = mysql.connector.connect(**DB_CONFIG, use_pure=True)
         if conn.is_connected():
             return conn
     except Error as e:

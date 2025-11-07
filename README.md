@@ -8,42 +8,97 @@ Proyecto para la materia de Programación Orientada a Objetos. Es una aplicació
 
 2. Gestión de Notas por Alumno: Para cada alumno seleccionado, la aplicación permite añadir, modificar y eliminar sus notas académicas (materia, calificación).
 
-3. Interfaz de Doble Panel: La pantalla principal está dividida en dos secciones para una gestión clara y simultánea de alumnos y sus notas correspondientes.
+3. Soft Delete: Los alumnos no se eliminan físicamente. Se marcan como "inactivos" (activo = 0), preservando la integridad de los datos y permitiendo auditorías.
 
-4. Persistencia de Datos: Toda la información se guarda de forma segura en una base de datos MySQL, garantizando que los datos no se pierdan al cerrar la aplicación.
+4. Lógica de Negocio Automatizada: El estado de una nota (Promocionado, Regular, Recursante) se calcula automáticamente en la Capa de Servicio basándose en la calificación.
 
-5. Relación de Datos: Utiliza claves foráneas para vincular de forma segura las notas con cada alumno, y elimina las notas en cascada si un alumno es borrado.
+5. Interfaz Gráfica Moderna: Construida con ttkbootstrap para una estética limpia y profesional.
+
+6. Diseño Responsivo: La ventana y sus componentes se adaptan al tamaño del monitor.
+
+7. Experiencia de Usuario (UX) Mejorada: Uso de listas desplegables (Combobox) cargadas desde la base de datos (Materias, Años), evitando que el usuario memorice IDs.
 
 # Tecnologías Utilizadas
 
-1. Lenguaje: Python 3
-2. Interfaz Gráfica (GUI): Tkinter
+1. Lenguaje: Python (3.11+)
+2. Interfaz Gráfica (GUI): ttkbootstrap (basado en tkinter)
 3. Base de Datos: MySQL (Workbench 8.0)
 4. Control de Versiones: Git y GitHub
-5. Arquitectura: Modelo-Vista-Servicio (una variación de MVC)
+5. Arquitectura: Modelo-Servicio-Vista (Model-Service-View)
+6. Conector de BD: mysql-connector-python
 
 # Estructura del Proyecto
 
 ```
-gestion_notas/
-├── __init__.py
-├── models/
-│   ├── __init__.py
-│   ├── alumno_model.py
-│   └── nota_model.py
-├── services/
-│   ├── __init__.py
-│   ├── alumno_service.py
-│   └── nota_service.py
-└── views/
+GESTION_NOTAS/
+├── .gitignore
+├── main.py               <-- (El lanzador de la aplicación)
+├── requirements.txt      <-- (Lista de dependencias)
+├── schema.sql            <-- (Script de creación de la BD)
+├── venv/
+└── gestion_notas/        <-- (El paquete principal del proyecto)
     ├── __init__.py
-    └── main_view.py
-main.py
+    ├── config/           <-- (Capa de Configuración)
+    │   ├── __init__.py
+    │   └── db_config.py
+    ├── models/           <-- (Capa de Modelos)
+    │   ├── __init__.py
+    │   ├── alumno_model.py
+    │   └── nota_model.py
+    ├── services/         <-- (Capa de Servicios - Lógica de Negocio)
+    │   ├── __init__.py
+    │   ├── alumno_service.py
+    │   ├── catalogo_service.py
+    │   └── nota_service.py
+    └── views/            <-- (Capa de Vista - UI)
+        ├── __init__.py
+        └── main_view.py
+
 ```
 
 # Instalación y Ejecución
 
-1. Clonar el repositorio: git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
+## Prerrequisitos
+
+1. Tener Python 3.11 o superior instalado. (Asegúrate de marcar "Add python.exe to PATH" durante la instalación).
+
+2. Tener un servidor MySQL local instalado y en ejecución (Ej: MySQL Workbench).
+
+## Configuración de la Base de Datos
+
+1. Abre tu cliente de MySQL (Workbench).
+
+2. Crea una nueva base de datos (schema) llamada gestion_notas.
+
+3. Abre y ejecuta el archivo schema.sql (incluido en este repositorio). Este script creará todas las tablas (alumnos, notas, materias, anios, estados) y poblará los catálogos necesarios para el primer uso.
+
+##  Clonar el Repositorio
+
+git clone [https://github.com/LlanosLaucha/GESTION_NOTAS.git](https://github.com/LlanosLaucha/GESTION_NOTAS.git)
+cd GESTION_NOTAS
+
+## Configurar el Entorno Virtual (Recomendado)
+
+1. Comandos: 
+
+```
+En Windows
+python -m venv venv
+
+En macOS / Linux
+python3 -m venv venv
+```
+
+2. Presiona Ctrl+Shift+P para abrir la Paleta de Comandos. 
+
+3. Escribe y selecciona la opción "Python: Select Interpreter" (Python: Seleccionar Intérprete).
+
+4. En la lista que aparece, selecciona el intérprete que está dentro de la carpeta venv que acabas de crear. La ruta será similar a:
+
+```
+.\venv\Scripts\python.exe (windows)
+./venv/bin/python (macOS/Linux)
+```
 
 
 2. Navegar al directorio del proyecto: cd nombre-del-repositorio
@@ -62,21 +117,28 @@ source venv/bin/activate
 ```
 
 
-4. Instalar las dependencias (el conector de MySQL): pip install mysql-connector-python
+# Instalar dependencias
 
+1. python -m pip install -r requirements.txt
 
-5. Configurar la Base de Datos:
-    a. Asegúrate de tener un servidor MySQL en ejecución.
-    b. Usando MySQL Workbench o cualquier otro cliente, crea una nueva base de datos. Ejemplo: CREATE DATABASE gestion_notas;
-    c. Crea la tabla necesaria para las notas (el script se proveerá más adelante).
+# Configuración local
 
-6. Ejecutar la aplicación: python main.py
+1. Abre el archivo: gestion_notas/config/db_config.py.
 
+2. Modifica el diccionario DB_CONFIG con tu usuario y contraseña local de MySQL.
+
+```
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'tu_usuario_root',
+    'password': 'tu_contraseña', # <-- ¡Modifica esta línea!
+    'database': 'gestion_notas'
+}
+```
 
 # Equipo de Desarrollo
 
 * **[Llanos Lautaro]** - Lider del proyecto / Tester / Documentador - @LlanosLaucha
-* **[Fleck Ian]** - Backend - @ianfleck00
 * **[Maidana Nicolas]** - Backend - @NicoMaidanaa
 * **[Kocur Malena]** - Frontend - @usuario-github
 * **[Fernandez Candela]** - Frontend - @candeelaa14

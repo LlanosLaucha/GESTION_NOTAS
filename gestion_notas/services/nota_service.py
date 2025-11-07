@@ -1,22 +1,48 @@
 from gestion_notas.models.nota_model import Nota
 from gestion_notas.config.db_config import get_db_connection
 from mysql.connector import Error
+from gestion_notas.services.catalogo_service import CatalogoService
 
 class NotaService:
 
     def __init__(self):
         """
-        Constructor vacío. La conexión se maneja por método.
+        Inicializa el servicio y carga el mapa de estados para la lógica de negocio.
         """
-        pass
+        self.catalogo_service = CatalogoService()
+        self.estados_map = self.catalogo_service.obtener_mapa_estados()
+        if not self.estados_map:
+            print("ERROR CRÍTICO: No se pudo cargar el mapa de estados.")
+
+    def _calcular_id_estado(self, nota_final: float):
+        """
+        Lógica de Negocio: Calcula el ID del estado basado en la calificación.
+        """
+        estado_nombre = ""
+        if nota_final < 6:
+            estado_nombre = "Recursante"
+        elif 6 <= nota_final < 8:
+            estado_nombre = "Regular"
+        else: # >= 8
+            estado_nombre = "Promocionado"
+        
+        id_estado = self.estados_map.get(estado_nombre)
+        
+        if id_estado is None:
+            raise ValueError(f"El estado '{estado_nombre}' no se encontró en la base de datos.")
+            
+        return id_estado
 
     def crear_nota(self, nota: Nota):
         """
-        Inserta una nueva nota en la base de datos.
+        Aplica la lógica de negocio y crea una nueva nota en la base de datos.
         """
         conn = None
         cursor = None
         try:
+            # Aplicar lógica de negocio
+            nota.id_estados = self._calcular_id_estado(nota.nota_final)
+
             conn = get_db_connection()
             if conn is None:
                 return None
@@ -37,9 +63,9 @@ class NotaService:
             cursor.execute(query, values)
             conn.commit()
             
-            return cursor.lastrowid  # Devuelve el id_notas generado
+            return cursor.lastrowid
 
-        except Error as e:
+        except (Error, ValueError) as e:
             print(f"Error al crear nota: {e}")
             return None
         
@@ -51,8 +77,7 @@ class NotaService:
 
     def obtener_notas_por_alumno(self, alumno_id: int):
         """
-        Obtiene todas las notas de un alumno específico, uniendo tablas
-        para obtener descripciones legibles.
+        Obtiene todas las notas de un alumno, incluyendo descripciones de las tablas foráneas.
         """
         conn = None
         cursor = None
@@ -62,7 +87,6 @@ class NotaService:
                 return []
 
             cursor = conn.cursor(dictionary=True)
-            # Esta es la consulta compleja del PDF, ahora activa
             query = """
                 SELECT n.*, m.descripcion AS materia, e.descripcion AS estado, a.descripcion AS anio
                 FROM notas n
@@ -75,7 +99,6 @@ class NotaService:
             cursor.execute(query, (alumno_id,))
             rows = cursor.fetchall()
             
-            # Usamos el modelo Nota (que ahora acepta **kwargs)
             return [Nota(**row) for row in rows]
 
         except Error as e:
@@ -90,11 +113,14 @@ class NotaService:
 
     def actualizar_nota(self, nota: Nota):
         """
-        Actualiza una nota existente.
+        Aplica la lógica de negocio y actualiza una nota existente.
         """
         conn = None
         cursor = None
         try:
+            # Aplicar lógica de negocio
+            nota.id_estados = self._calcular_id_estado(nota.nota_final)
+            
             conn = get_db_connection()
             if conn is None:
                 return 0
@@ -121,7 +147,7 @@ class NotaService:
             
             return cursor.rowcount
 
-        except Error as e:
+        except (Error, ValueError) as e:
             print(f"Error al actualizar nota: {e}")
             return 0
         
@@ -133,7 +159,7 @@ class NotaService:
 
     def eliminar_nota(self, id_nota: int):
         """
-        Elimina una nota según su ID.
+        Elimina permanentemente una nota por su ID.
         """
         conn = None
         cursor = None
