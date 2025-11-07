@@ -100,23 +100,6 @@ python3 -m venv venv
 ./venv/bin/python (macOS/Linux)
 ```
 
-
-2. Navegar al directorio del proyecto: cd nombre-del-repositorio
-
-
-3. (Recomendado) Crear un entorno virtual:
-
-```
-# En Windows
-python -m venv venv
-venv\Scripts\activate
-
-# En macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-
 # Instalar dependencias
 
 1. python -m pip install -r requirements.txt
